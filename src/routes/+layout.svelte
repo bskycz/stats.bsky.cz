@@ -65,16 +65,20 @@
       </p>
       <p class="opacity-75">
         <br />
-        Web vytvořil 🌴
+        Web vytvořil
         <a
           href="https://bsky.cz/profile/tree.fail"
           class="underline hover:no-underline">@tree.fail</a
         >
-        pomocí
-        <img src="/svelte.svg" class="h-5 mx-0.5 inline-block" />
+        🌴 pomocí
         <a href="https://svelte.dev/" class="underline hover:no-underline"
           >Svelte</a
         >
+        <img src="/svelte.svg" class="h-5 mx-0.5 inline-block" />
+        (<a
+          href="https://github.com/burningtree/bsky-cz-web"
+          class="underline hover:no-underline">zdrojový kód</a
+        >)
       </p>
     </aside>
     <nav class="grow">

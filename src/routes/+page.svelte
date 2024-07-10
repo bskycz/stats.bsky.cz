@@ -6,15 +6,21 @@
   import { BarChartSimple, LineChart, HistogramChart, ComboChart, AreaChart } from '@carbon/charts-svelte'
   import '@carbon/charts-svelte/styles.css'
   import Chart from '../components/Chart.svelte'
+  import { loadData } from '../lib'
+  import { onMount } from "svelte";
 
-  let { data } = $props();
+  let data = $state(null)
+
+  onMount(async () => {
+    data = await loadData()
+  })
 
   let offset = $state(0)
   let limit = $state(100)
 
-  const users = data.users
+  const users = $derived(data && data.users
     .filter((u) => u.included)
-    .sort((x, y) => (y.followers > x.followers ? 1 : -1))
+    .sort((x, y) => (y.followers > x.followers ? 1 : -1)))
 
   function getAvatarUrl(u) {
     return u.avatar ? `https://data.bsky.cz/avatars/thumb/${u.did}.avif` : "/avatar.jpg";
@@ -140,6 +146,7 @@
   height: '400px'}} style="padding:2rem;" />
 </div-->
 
+{#if data}
 <div class="flex w-full mt-10 mb-10 gap-10">
 
   <!--div class="h-[400px]">
@@ -350,6 +357,10 @@
     <li>Více než polovina všech příspěvků uživatele musí být v češtině</li>
   </ul>
 </div>
+
+{:else}
+  <div class="mt-10">Načítám data ..</div>
+{/if}
 
 <div class="mt-10"></div>
 

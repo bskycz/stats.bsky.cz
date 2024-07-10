@@ -86,10 +86,6 @@
   {:else}
     <div
       class="w-full h-full rounded-xl duration-500 flex items-center justify-center text-2xl text-neutral-content/50 blur"
-      style="background-image: url(/graph-{type}.webp); background-size: 100% 100%; background-position: {type ===
-      'posts'
-        ? '-1px 4px'
-        : '-5px 3px'};"
     ></div>
   {/if}
 </div>
