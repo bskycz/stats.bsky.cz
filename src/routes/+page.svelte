@@ -192,7 +192,7 @@
 
   {#snippet statsPane(type)}
     <div>
-      <h3 class="text-2xl mb-2">Top přispěvatelé</h3>
+      <h3 class="text-2xl mb-2">Top přispěvatelé v češtině</h3>
       <div class="mb-4 flex gap-2">
         {#each durationOptions as d}
           <div class:font-bold={durationSelected === d[1]} class="hover:underline cursor-pointer" onclick={() => { document.getElementById("scroller-"+type).scroll({ top: 0 }); durationSelected = d[1]; }}>{d[0]}</div>
@@ -239,7 +239,7 @@
 </div>
 
 <h2 class="mt-10 mb-4 text-2xl">
-  Seznam českých uživatelů ({users.length})
+  Uživatelé píšící česky ({users.length})
 </h2>
 <table class="table mb-10">
   <thead>
