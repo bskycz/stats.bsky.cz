@@ -6,7 +6,7 @@ export {
 }*/
 
 export async function loadData () {
-    const res = await fetch(`https://data.bsky.cz/data.json`);
+    const res = await fetch(`https://data.bsky.cz/index.json`);
 	const data = await res.json();
     return data
 }
