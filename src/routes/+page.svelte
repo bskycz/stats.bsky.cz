@@ -22,16 +22,21 @@
     .filter((u) => u.included)
     .sort((x, y) => (y.followers > x.followers ? 1 : -1)))
 
+  const usersExpats = $derived(data && data.users
+    .filter((u) => !u.included && u.czechNational && !u.optout && !u.deleted && !u.redacted)
+    .sort((x, y) => (y.followers > x.followers ? 1 : -1)))
+
+  function lastPostDiff(u) {
+    const diffTime = Math.abs(Date.now() - new Date(u.lastPostDate));
+    const diffDays = Math.floor(diffTime / (1000 * 60 * 60 * 24))
+    return diffDays
+  }
+
   function getAvatarUrl(u) {
     return u.avatar ? `https://data.bsky.cz/avatars/thumb/${u.did}.avif` : "/avatar.jpg";
   }
   function getUser(did) {
     return users.find(u => u.did === did)
-  }
-  function lastPostDiff(u) {
-    const diffTime = Math.abs(Date.now() - new Date(u.lastPostDate));
-    const diffDays = Math.floor(diffTime / (1000 * 60 * 60 * 24))
-    return diffDays
   }
 
   let durationSelected = $state("day")
@@ -238,9 +243,7 @@
 
 </div>
 
-<h2 class="mt-10 mb-4 text-2xl">
-  Uživatelé píšící česky ({users.length})
-</h2>
+{#snippet usersTable (uarr, prefix="")}
 <table class="table mb-10">
   <thead>
     <tr>
@@ -255,9 +258,9 @@
     </tr>
   </thead>
   <tbody>
-    {#each users as user, i}
+    {#each uarr as user, i}
       <tr class:opacity-100={lastPostDiff(user) > 60} class="hover">
-        <td class="opacity-50 text-center">{i + 1}.</td>
+        <td class="opacity-50 text-center">{prefix}{i + 1}.</td>
         <td class="shrink-0">
           <div
             class="w-12 h-12 shrink-0 rounded-full aspect-square bg-gray-500/20"
@@ -345,6 +348,24 @@
     {/each}
   </tbody>
 </table>
+{/snippet}
+
+<div id="base" class="mt-10 flex gap-4 items-center mb-4">
+  <h2 class="text-2xl">
+    Uživatelé píšící česky ({users.length})
+  </h2>
+  <a href="#expats" class="btn btn-sm btn-neutral">Další čeští uživatelé ({usersExpats.length})</a>
+</div>
+{@render usersTable(users)}
+
+<div id="expats" class="mt-10 flex gap-4 items-center mb-4">
+  <h2 class="text-2xl">
+    Další čeští uživatelé ({usersExpats.length})
+  </h2>
+  <a href="#base" class="btn btn-sm btn-neutral">Uživatelé píšící česky ({users.length})</a>
+</div>
+<div class="mb-4 opacity-50">Uživatelé českého původu, kteří nepíšou převážně v češtině. Tito uživatelé se nezapočítávají do statistik výše.</div>
+{@render usersTable(usersExpats, "x")}
 
 <div class="mb-6">
   Naposledy aktualizováno: {data.time}
