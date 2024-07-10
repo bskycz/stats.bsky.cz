@@ -357,6 +357,13 @@
   <a href="#expats" class="btn btn-sm btn-neutral">Další čeští uživatelé ({usersExpats.length})</a>
 </div>
 {@render usersTable(users)}
+<div class="prose">
+  <p>Podmínky pro zařazení do seznamu:</p>
+  <ul>
+    <li>Uživatel musí mít alespoň 5 příspěvků v českém jazyce</li>
+    <li>Více než polovina všech příspěvků uživatele musí být v češtině</li>
+  </ul>
+</div>
 
 <div id="expats" class="mt-10 flex gap-4 items-center mb-4">
   <h2 class="text-2xl">
@@ -364,19 +371,11 @@
   </h2>
   <a href="#base" class="btn btn-sm btn-neutral">Uživatelé píšící česky ({users.length})</a>
 </div>
-<div class="mb-4 opacity-50">Uživatelé českého původu, kteří nepíšou převážně v češtině. Tito uživatelé se nezapočítávají do statistik výše.</div>
+<div class="mb-4 opacity-50">Uživatelé českého původu, kteří nesplňují podmínky pro zařazení do hlavního seznamu. Tito uživatelé se nezapočítávají do statistik výše.</div>
 {@render usersTable(usersExpats, "x")}
 
 <div class="mb-6">
   Naposledy aktualizováno: {data.time}
-</div>
-
-<div class="prose">
-  <p>Podmínky pro zařazení do seznamu:</p>
-  <ul>
-    <li>Uživatel musí mít alespoň 5 příspěvků v českém jazyce</li>
-    <li>Více než polovina všech příspěvků uživatele musí být v češtině</li>
-  </ul>
 </div>
 
 {:else}
