@@ -1,0 +1,15 @@
+@tailwind base;
+@tailwind components;
+@tailwind utilities;
+
+html,
+body {
+  font-family: -apple-system, BlinkMacSystemFont, "Segoe UI", Roboto,
+    "Liberation Sans", Helvetica, Arial, sans-serif;
+}
+.rtl {
+  color: rgb(32, 139, 254);
+}
+.rtl:hover {
+  text-decoration: underline;
+}
