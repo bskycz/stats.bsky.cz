@@ -354,7 +354,7 @@
   <h2 class="text-2xl">
     Uživatelé píšící česky ({users.length})
   </h2>
-  <a href="#expats" class="btn btn-sm btn-neutral">Další čeští uživatelé ({usersExpats.length})</a>
+  <a href="#expats" class="btn btn-sm btn-ghost">Další čeští uživatelé ({usersExpats.length})</a>
 </div>
 {@render usersTable(users)}
 <div class="prose">
@@ -369,7 +369,7 @@
   <h2 class="text-2xl">
     Další čeští uživatelé ({usersExpats.length})
   </h2>
-  <a href="#base" class="btn btn-sm btn-neutral">Uživatelé píšící česky ({users.length})</a>
+  <a href="#base" class="btn btn-sm btn-ghost">Uživatelé píšící česky ({users.length})</a>
 </div>
 <div class="mb-4 opacity-50">Uživatelé českého původu, kteří nesplňují podmínky pro zařazení do hlavního seznamu. Tito uživatelé se nezapočítávají do statistik výše.</div>
 {@render usersTable(usersExpats, "x")}
