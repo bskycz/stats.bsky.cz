@@ -1,11 +1,13 @@
 <script>
-  import { data } from "$lib";
+
   import { formatDistanceToNow } from "date-fns";
   import { cs } from "date-fns/locale";
   import numbro from "numbro";
   import { BarChartSimple, LineChart, HistogramChart, ComboChart, AreaChart } from '@carbon/charts-svelte'
   import '@carbon/charts-svelte/styles.css'
   import Chart from '../components/Chart.svelte'
+
+  let { data } = $props();
 
   let offset = $state(0)
   let limit = $state(100)
@@ -15,7 +17,7 @@
     .sort((x, y) => (y.followers > x.followers ? 1 : -1))
 
   function getAvatarUrl(u) {
-    return u.avatar ? `/avatars/${u.did}.avif` : "/avatar.jpg";
+    return u.avatar ? `https://data.bsky.cz/avatars/thumb/${u.did}.avif` : "/avatar.jpg";
   }
   function getUser(did) {
     return users.find(u => u.did === did)
@@ -246,7 +248,7 @@
     </tr>
   </thead>
   <tbody>
-    {#each users.slice(0,100) as user, i}
+    {#each users as user, i}
       <tr class:opacity-100={lastPostDiff(user) > 60} class="hover">
         <td class="opacity-50 text-center">{i + 1}.</td>
         <td class="shrink-0">
