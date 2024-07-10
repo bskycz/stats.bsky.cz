@@ -8,6 +8,7 @@
   import Chart from '../components/Chart.svelte'
   import { loadData } from '../lib'
   import { onMount } from "svelte";
+  import { use } from "echarts";
 
   let data = $state(null)
 
@@ -259,7 +260,7 @@
   </thead>
   <tbody>
     {#each uarr as user, i}
-      <tr class:opacity-100={lastPostDiff(user) > 60} class="hover">
+      <tr class:opacity-100={!prefix && lastPostDiff(user) > 60} class="hover">
         <td class="opacity-50 text-center">{prefix}{i + 1}.</td>
         <td class="shrink-0">
           <div
@@ -274,7 +275,7 @@
           </div>
         </td>
         <td class="pb-2">
-          <div class:opacity-50={lastPostDiff(user) > 60}>
+          <div class:opacity-50={!prefix && lastPostDiff(user) > 60}>
             <a
               href="https://bsky.app/profile/{user.handle}"
               target="_blank"
@@ -301,7 +302,7 @@
               <a href="https://x.com/{user.twitter}" target="_blank">𝕏</a>
             {/if}
           </div>
-          {#if lastPostDiff(user) > 60}
+          {#if !prefix && lastPostDiff(user) > 60}
             <div class="badge badge-outline text-xs mt-1">Poslední příspěvek před {lastPostDiff(user)} dny</div>
           {/if}
         </td>
@@ -312,7 +313,7 @@
           ><div>{user.follows}</div>
           <div class="text-xs opacity-50">sleduje</div></td
         -->
-        <td><div class="text-center">{user.localPosts}</div> </td>
+        <td><div class="text-center">{user.localPosts}{#if prefix && user.posts !== user.localPosts}<div class="text-xs">({user.posts})</div>{/if}</div> </td>
         <td>
           <div>
             <div class="text-xs flex gap-1 items-center">
