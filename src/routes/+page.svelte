@@ -1,6 +1,6 @@
 <script>
 
-  import { formatDistanceToNow } from "date-fns";
+  import { formatDistanceToNow, format } from "date-fns";
   import { cs } from "date-fns/locale";
   import numbro from "numbro";
   import { BarChartSimple, LineChart, HistogramChart, ComboChart, AreaChart } from '@carbon/charts-svelte'
@@ -375,8 +375,8 @@
 <div class="mb-4 opacity-50">Uživatelé českého původu, kteří nesplňují podmínky pro zařazení do hlavního seznamu. Tito uživatelé se nezapočítávají do statistik výše.</div>
 {@render usersTable(usersExpats, "x")}
 
-<div class="mb-6">
-  Naposledy aktualizováno: {data.time}
+<div class="mb-6 opacity-50 text-sm">
+  Naposledy aktualizováno: {format(new Date(data.time), "PPPPpppp", { locale: cs })} (<a href="https://data.bsky.cz" class="hover:underline">data.bsky.cz</a>)
 </div>
 
 {:else}
