@@ -12,8 +12,23 @@
 
   let data = $state(null)
 
+  function lastPostDiff(u) {
+    const diffTime = Math.abs(Date.now() - new Date(u.lastPostDate));
+    const diffDays = Math.floor(diffTime / (1000 * 60 * 60 * 24))
+    return diffDays
+  }
+  
   onMount(async () => {
-    data = await loadData()
+    const d = await loadData()
+    if (d && Array.isArray(d.users)) {
+      d.users = d.users.map(u => {
+        if (u.included || u.czechNational) {
+          u.lastPostDiff = lastPostDiff(u)
+        }
+        return u
+      })
+    }
+    data = d
   })
 
   let offset = $state(0)
@@ -26,12 +41,6 @@
   const usersExpats = $derived(data && data.users
     .filter((u) => !u.included && u.czechNational && !u.optout && !u.deleted && !u.redacted)
     .sort((x, y) => (y.followers > x.followers ? 1 : -1)))
-
-  function lastPostDiff(u) {
-    const diffTime = Math.abs(Date.now() - new Date(u.lastPostDate));
-    const diffDays = Math.floor(diffTime / (1000 * 60 * 60 * 24))
-    return diffDays
-  }
 
   function getAvatarUrl(u) {
     return u.avatar ? `https://data.bsky.cz/avatars/thumb/${u.did}.avif` : "/avatar.jpg";
@@ -260,7 +269,7 @@
   </thead>
   <tbody>
     {#each uarr as user, i}
-      <tr class:opacity-100={!prefix && lastPostDiff(user) > 60} class="hover">
+      <tr class:opacity-100={!prefix && user.lastPostDiff > 60} class="hover">
         <td class="opacity-50 text-center">{prefix}{i + 1}.</td>
         <td class="shrink-0">
           <div
@@ -275,7 +284,7 @@
           </div>
         </td>
         <td class="pb-2">
-          <div class:opacity-50={!prefix && lastPostDiff(user) > 60}>
+          <div class:opacity-50={!prefix && user.lastPostDiff > 60}>
             <a
               href="https://bsky.app/profile/{user.handle}"
               target="_blank"
@@ -302,8 +311,8 @@
               <a href="https://x.com/{user.twitter}" target="_blank">𝕏</a>
             {/if}
           </div>
-          {#if !prefix && lastPostDiff(user) > 60}
-            <div class="badge badge-outline text-xs mt-1">Poslední příspěvek před {lastPostDiff(user)} dny</div>
+          {#if !prefix && user.lastPostDiff > 60}
+            <div class="badge badge-outline text-xs mt-1">Poslední příspěvek před {user.lastPostDiff} dny</div>
           {/if}
         </td>
         <td>
