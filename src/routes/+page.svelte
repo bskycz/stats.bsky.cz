@@ -380,7 +380,12 @@
 </div>
 
 {:else}
-  <div class="mt-10">Načítám data ..</div>
+  <div class="w-full h-[50vw] flex items-center justify-center mt-10">
+    <div class="text-center">
+      <div class="loading loading-dots loading-lg" style="width:75px; height: 75px;"></div>
+      <div>Načítám data ..</div>
+    </div>
+  </div>
 {/if}
 
 <div class="mt-10"></div>
