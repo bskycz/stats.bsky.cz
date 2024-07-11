@@ -315,14 +315,22 @@
             <div class="badge badge-outline text-xs mt-1">Poslední příspěvek před {user.lastPostDiff} dny</div>
           {/if}
         </td>
-        <td>
+        <td class="text-center">
           <div class="text-center">{user.followers}</div>
+          {#if user.followersWeek !== null}
+            <div class="opacity-50 mt-0.5 text-xs">{#if user.followersWeek > 0}<span class="text-green-500">▲</span>{:else}<span class="text-red-500">▼</span>{/if} {(Math.abs(user.followersWeek))}</div>
+          {/if}
         </td>
         <!--td
           ><div>{user.follows}</div>
           <div class="text-xs opacity-50">sleduje</div></td
         -->
-        <td><div class="text-center">{user.localPosts}{#if prefix && user.posts !== user.localPosts}<div class="text-xs">({user.posts})</div>{/if}</div> </td>
+        <td class="text-center">
+          <div class="text-center">{user.localPosts}{#if prefix && user.posts !== user.localPosts}<div class="text-xs">({user.posts})</div>{/if}</div>
+          {#if user.localPostsWeek !== null}
+            <div class="opacity-50 mt-0.5 text-xs">{#if user.localPostsWeek > 0}<span class="text-green-500">▲</span>{:else}<span class="text-red-500">▼</span>{/if} {(Math.abs(user.localPostsWeek))}</div>
+          {/if}
+        </td>
         <td>
           <div>
             <div class="text-xs flex gap-1 items-center">
