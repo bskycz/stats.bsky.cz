@@ -389,7 +389,7 @@
 </div>
 
 {:else}
-  <div class="w-full h-[50vw] flex items-center justify-center mt-10">
+  <div class="w-full h-[70vh] flex items-center justify-center mt-10">
     <div class="text-center">
       <div class="loading loading-dots loading-lg" style="width:75px; height: 75px;"></div>
       <div>Načítám data ..</div>
