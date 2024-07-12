@@ -1,6 +1,6 @@
 
 <script>
-    import { loadData, richText, getAvatarUrl, getUser } from '../lib'
+    import { richText, getAvatarUrl } from '../lib'
     import numbro from "numbro"
 
     const { users, prefix } = $props()

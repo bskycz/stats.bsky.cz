@@ -1,11 +1,11 @@
 <script>
 
   import { onMount } from "svelte"
-  import { formatDistanceToNow, format } from "date-fns";
+  import { format } from "date-fns";
   import { cs } from "date-fns/locale";
   import Chart from '../components/Chart.svelte'
   import UsersTable from "../components/UsersTable.svelte"
-  import { loadData, richText, getAvatarUrl, getUser } from '../lib'
+  import { loadData, getAvatarUrl, getUser } from '../lib'
 
   let data = $state(null)
 
