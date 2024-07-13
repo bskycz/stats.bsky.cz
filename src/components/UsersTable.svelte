@@ -13,7 +13,7 @@
   <div class="opacity-75 mt-0.5 text-xs">
     {#if diff > 0}<span class="text-green-500">▲ {(Math.abs(diff))}</span>
     {:else if diff < 0}<span class="text-red-500">▼ {(Math.abs(diff))}</span>
-    {:else}{(Math.abs(diff))}{(Math.abs(udiff))}{/if}
+    {:else}{(Math.abs(diff))}{(Math.abs(diff))}{/if}
   </div>
   {/if}
 {/snippet}
@@ -71,14 +71,14 @@
                 {/if}
               {/each}
               {#if user.createdAt < "2023-07-01T00:00"}
-                <span class="text-xs badge badge-sm badge-ghost" title="Účet založen: {format(user.createdAt, "PPPPpppp", { locale: cs })}">🌱 OG</span>
+                <span class="badge badge-sm badge-ghost tooltip cursor-help" data-tip="Účet založen: {format(user.createdAt, "PPPPpppp", { locale: cs })}">🌱 OG</span>
               {/if}
               {#if user.twitter}
                 <a href="https://x.com/{user.twitter}" target="_blank">𝕏</a>
               {/if}
             </div>
-            {#if !prefix && user.lastPostDiff > 60}
-              <div class="badge badge-outline text-xs mt-1">Poslední příspěvek před {user.lastPostDiff} dny</div>
+            {#if user.lastPostDiff > 60}
+              <div class="badge badge-outline text-xs mt-1 opacity-50">{#if user.localPosts > 0}Poslední příspěvek před {user.lastPostDiff} dny{:else}Žádný příspěvek v češtině{/if}</div>
             {/if}
           </td>
           <td class="text-center">
@@ -86,8 +86,9 @@
             {@render changeDiff(user.followersWeek)}
           </td>
           <td class="text-center">
-            <div class="text-center">{user.localPosts}{#if prefix && user.posts !== user.localPosts}<div class="text-xs">({user.posts})</div>{/if}</div>
-            <!--{@render changeDiff(user.localPostsWeek)}-->
+            <div class="text-center">{user.posts}</div>
+            {@render changeDiff(user.postsWeek)}
+            {#if user.posts !== user.localPosts && user.localPosts/(user.posts/100) < 50}<div class="text-xs ml-1 text-base-content/50 mt-0.5 tooltip cursor-help" data-tip="Tento uživatel má pouze {Math.round(((user.localPosts/(user.posts/100))/10)*10)}% příspěvků v češtině.">({Math.round(((user.localPosts/(user.posts/100))/10)*10)}%)</div>{/if}
           </td>
           <td>
             <div>
