@@ -2,6 +2,8 @@
 <script>
     import { richText, getAvatarUrl } from '../lib'
     import numbro from "numbro"
+    import { format } from "date-fns";
+    import { cs } from "date-fns/locale";
 
     const { users, prefix } = $props()
 </script>
@@ -68,6 +70,9 @@
                   >
                 {/if}
               {/each}
+              {#if user.createdAt < "2023-07-01T00:00"}
+                <span class="text-xs badge badge-sm badge-ghost" title="Účet založen: {format(user.createdAt, "PPPPpppp", { locale: cs })}">🌱 OG</span>
+              {/if}
               {#if user.twitter}
                 <a href="https://x.com/{user.twitter}" target="_blank">𝕏</a>
               {/if}
