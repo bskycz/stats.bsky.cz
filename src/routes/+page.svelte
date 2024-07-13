@@ -125,7 +125,7 @@
   <p>Podmínky pro zařazení do seznamu:</p>
   <ul>
     <li>Uživatel musí mít alespoň 5 příspěvků v českém jazyce</li>
-    <li>Více než polovina všech příspěvků uživatele musí být v češtině</li>
+    <li>Více než 25% všech příspěvků uživatele musí být v češtině</li>
   </ul>
 </div>
 
