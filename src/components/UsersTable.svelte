@@ -82,7 +82,7 @@
           </td>
           <td class="text-center">
             <div class="text-center">{user.localPosts}{#if prefix && user.posts !== user.localPosts}<div class="text-xs">({user.posts})</div>{/if}</div>
-            {@render changeDiff(user.localPostsWeek)}
+            <!--{@render changeDiff(user.localPostsWeek)}-->
           </td>
           <td>
             <div>
