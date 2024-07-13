@@ -10,7 +10,7 @@
 
 {#snippet changeDiff (diff)}
   {#if diff !== null}
-  <div class="opacity-50 mt-0.5 text-xs">
+  <div class="opacity-75 mt-0.5 text-xs">
     {#if diff > 0}<span class="text-green-500">▲ {(Math.abs(diff))}</span>
     {:else if diff < 0}<span class="text-red-500">▼ {(Math.abs(diff))}</span>
     {:else}{(Math.abs(diff))}{(Math.abs(udiff))}{/if}
