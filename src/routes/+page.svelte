@@ -39,6 +39,11 @@
     .filter((u) => !u.included && u.czechNational && !u.optout && !u.deleted && !u.redacted)
     .sort((x, y) => (y.followers > x.followers ? 1 : -1)))
 
+  const usersNewest = $derived(data && data.users
+    .filter((u) => u.localPosts >= 1 || u.czechNational)
+    .sort((x, y) => new Date(y.createdAt) - new Date(x.createdAt))
+    .slice(0, 100))
+
   let durationSelected = $state("day")
   const durationOptions = [
     ["24 hodin", "day"],
@@ -118,6 +123,7 @@
     Uživatelé píšící česky ({users.length})
   </h2>
   <a href="#expats" class="btn btn-sm btn-ghost">Další čeští uživatelé ({usersExpats.length})</a>
+  <a href="#newest" class="btn btn-sm btn-ghost">{usersNewest.length} nejnovějších českých účtů</a>
 </div>
 <UsersTable {users} />
 
@@ -134,10 +140,21 @@
     Další čeští uživatelé ({usersExpats.length})
   </h2>
   <a href="#base" class="btn btn-sm btn-ghost">Uživatelé píšící česky ({users.length})</a>
+  <a href="#newest" class="btn btn-sm btn-ghost">{usersNewest.length} nejnovějších českých účtů</a>
 </div>
 <div class="mb-4 opacity-50">Uživatelé českého původu, kteří nesplňují podmínky pro zařazení do hlavního seznamu. Tito uživatelé se nezapočítávají do statistik výše.</div>
 
 <UsersTable users={usersExpats} prefix="x" />
+
+<div id="newest" class="mt-10 flex gap-4 items-center mb-4">
+  <h2 class="text-2xl">
+   Nejnovější uživatelé ({usersNewest.length})
+  </h2>
+  <a href="#base" class="btn btn-sm btn-ghost">Uživatelé píšící česky ({users.length})</a>
+  <a href="#expats" class="btn btn-sm btn-ghost">Další čeští uživatelé ({usersExpats.length})</a>
+</div>
+<div class="mb-4 opacity-50">{usersNewest.length} nejnovějších českých účtů</div>
+<UsersTable users={usersNewest} prefix="n" />
 
 <div class="mb-6 opacity-50 text-sm">
   Naposledy aktualizováno: {format(new Date(data.time), "PPPPpppp", { locale: cs })} (<a href="https://data.bsky.cz" class="hover:underline">data.bsky.cz</a>)

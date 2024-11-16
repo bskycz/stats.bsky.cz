@@ -2,10 +2,11 @@
 <script>
     import { richText, getAvatarUrl } from '../lib'
     import numbro from "numbro"
-    import { format } from "date-fns";
+    import { format, formatDistance } from "date-fns";
     import { cs } from "date-fns/locale";
 
     const { users, prefix } = $props()
+    const now = new Date()
 </script>
 
 {#snippet changeDiff (diff)}
@@ -24,6 +25,9 @@
         <th>Pořadí</th>
         <th>Jméno</th>
         <th></th>
+        {#if prefix === "n"}
+        <th>Přidal/a se</th>
+        {/if}
         <th>Sleďů</th>
         <th>Zpráv</th>
         <th>Získáno</th>
@@ -33,14 +37,15 @@
     <tbody>
       {#each users as user, i}
         <tr class:opacity-100={!prefix && user.lastPostDiff > 60} class="hover">
-          <td class="opacity-50 text-center">{prefix}{i + 1}.</td>
+          <td class="opacity-50 text-center">{#if prefix === "x"}{prefix}{/if}{i + 1}.</td>
           <td class="shrink-0">
             <div
               class="w-12 h-12 shrink-0 rounded-full aspect-square bg-gray-500/20"
             >
+              <!-- TODO fix avatars for new users --> 
               <img
                 loading="lazy"
-                src={getAvatarUrl(user)}
+                src={prefix !== "n" ? getAvatarUrl(user) : "/avatar.jpg"}
                 alt={user.handle}
                 class="w-12 h-12 aspect-square rounded-full shrink-0"
               />
@@ -81,6 +86,16 @@
               <div class="badge badge-outline text-xs mt-1 opacity-50">{#if user.localPosts > 0}Poslední příspěvek před {user.lastPostDiff} dny{:else}Žádný příspěvek v češtině{/if}</div>
             {/if}
           </td>
+          {#if prefix === "n"}
+          <td class="text-sm">
+            {#if user?.createdAt}
+              {formatDistance(new Date(user.createdAt), now, {
+                locale: cs,
+                addSuffix: true
+              })}
+            {/if}
+          </td>
+          {/if}
           <td class="text-center">
             <div class="text-center">{user.followers}</div>
             {@render changeDiff(user.followersWeek)}
