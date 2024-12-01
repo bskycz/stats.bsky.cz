@@ -67,7 +67,7 @@
         <br />
         Web vytvořil
         <a
-          href="https://bsky.cz/profile/tree.fail"
+          href="https://bsky.app/profile/tree.fail"
           class="underline hover:no-underline">@tree.fail</a
         >
         🌴 pomocí
