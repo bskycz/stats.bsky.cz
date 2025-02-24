@@ -1,5 +1,5 @@
-# bsky.cz web
+# stats.bsky.cz web
 
-https://bsky.cz
+Statistiky českých uživatelů
 
-TODO
+https://stats.bsky.cz
