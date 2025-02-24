@@ -8,18 +8,21 @@
 
 <div class="max-w-6xl mx-auto">
   <div class="flex items-center mt-6">
-    <h1 class="text-3xl grow">🦋 Bluesky Česko 🇨🇿</h1>
+    <h1 class="text-3xl grow">🦋 Bluesky Česko - Statistiky 🇨🇿</h1>
     <div class="text-lg flex gap-6">
+      <div>
+        📄 <a href="https://bsky.cz">Dokumentace</a>
+      </div>
       <div>
         🦋 <a href="https://bsky.app/profile/bsky.cz" class="hover:underline"
           >@bsky.cz</a
         >
       </div>
-      <div>
+      <!--div>
         𝕏 <a href="https://x.com/bskyczech" class="hover:underline"
           >@bskyczech</a
         >
-      </div>
+      </div-->
       <div>
         <label class="swap swap-rotate">
           <!-- this hidden checkbox controls the state -->
